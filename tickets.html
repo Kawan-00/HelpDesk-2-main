@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tickets</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="../assets/logo-small.ico" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div class="app-container">
+    <!-- Sidebar (mesma do dashboard) -->
+    <div class="sidebar collapsed" id="sidebar">
+      <div class="sidebar-header">
+        <button id="toggleBtn" class="btn-toggle"><img src="assets/logo-small.png" width="40" alt="Logo"></button>
+        <span class="app-name">Helpdesk</span>
+      </div>
+
+      <div class="menu-group">
+        <a href="dashboard.html" class="menu-item active">
+          <i class="bi bi-house"></i> <span>Dashboard</span>
+        </a>
+        <a href="tickets.html" class="menu-item">
+          <i class="bi bi-ticket-perforated"></i> <span>Tickets</span>
+        </a>
+        <a href="profile.html" class="menu-item">
+          <i class="bi bi-person"></i> <span>Perfil</span>
+        </a>
+        <a href="notifications.html" class="menu-item">
+          <i class="bi bi-bell"></i> <span>Notificações</span>
+          <span id="notificationBadge" class="badge">0</span>
+        </a>
+      </div>
+      
+      <a href="#" class="menu-item logout-btn" onclick="logout()">
+        <i class="bi bi-box-arrow-right"></i> <span>Sair</span>
+      </a>
+    </div>
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="content-view">
+        <div class="content-header">
+          <h2><i class="bi bi-ticket-perforated"></i> Solicitar Suporte</h2>
+          <p>Preencha os detalhes do seu problema</p>
+        </div>
+
+        <form id="ticketForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ticketPriority">Prioridade</label>
+              <select id="ticketPriority" required>
+                <option value="">Selecione...</option>
+                <option value="baixa">Baixa Prioridade</option>
+                <option value="media">Média Prioridade</option>
+                <option value="alta">Alta Prioridade</option>
+                <option value="critica">Crítica</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="ticketCategory">Categoria</label>
+              <select id="ticketCategory" required>
+                <option value="">Selecione...</option>
+                <option value="tecnico">Problema Técnico</option>
+                <option value="software">Software</option>
+                <option value="hardware">Hardware</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="ticketTitle">Assunto</label>
+            <input type="text" id="ticketTitle" placeholder="Descreva brevemente o problema" required>
+          </div>
+
+          <div class="form-group">
+            <label for="ticketMsg">Descrição</label>
+            <textarea id="ticketMsg" placeholder="Descreva o problema em detalhes..." rows="5" required></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+              <i class="bi bi-send"></i> Enviar Ticket
+            </button>
+          </div>
+        </form>
+
+        <div class="section">
+          <div class="section-header">
+            <h3><i class="bi bi-ticket-detailed"></i> Meus Tickets</h3>
+          </div>
+
+          <div id="userTickets" class="tickets-grid">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Chatbot Widget -->
+<!-- Chatbot Widget -->
+<div id="chatbotWidget" class="chatbot-widget">
+  <div class="chatbot-header">
+    <div class="chatbot-title">
+      <i class="bi bi-chat-dots"></i>
+      <span>Assistente de Suporte</span>
+    </div>
+    <button class="btn-chatbot-close" id="closeChatbot">
+      <i class="bi bi-x"></i>
+    </button>
+  </div>
+  
+  <div class="chatbot-messages" id="chatbotMessages">
+    <!-- As mensagens serão inseridas aqui via JavaScript -->
+  </div>
+  
+  <div class="chatbot-actions" id="chatbotActions">
+    <!-- Os botões de ação serão inseridos aqui via JavaScript -->
+  </div>
+</div>
+
+<!-- Botão para abrir o chatbot -->
+<button id="openChatbot" class="chatbot-toggle-btn">
+  <i class="bi bi-chat-dots"></i>
+</button>
+
+    <script src="js/storage.js"></script>
+    <script src="js/tickets.js"></script>
+    <script src="js/chatbot.js"></script>
+    
+</body>
+
+</html>

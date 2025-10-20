@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Tickets</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="../assets/logo-small.ico" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <div class="app-container">
+    <!-- Sidebar (mesma do admin dashboard) -->
+    <div class="sidebar collapsed" id="sidebar">
+      <div class="sidebar-header">
+        <button id="toggleBtn" class="btn-toggle"><img src="../assets/logo-small.png" width="40" alt="Logo"></button>
+        <span class="app-name">Helpdesk</span>
+      </div>
+
+            <div class="menu-group">
+        <a href="dashboard.html" class="menu-item">
+          <i class="bi bi-house"></i> <span>Dashboard</span>
+        </a>
+        <a href="tickets.html" class="menu-item active">
+          <i class="bi bi-ticket-perforated"></i> <span>Tickets</span>
+        </a>
+        <a href="profile.html" class="menu-item">
+          <i class="bi bi-person"></i> <span>Perfil</span>
+        </a>
+        <a href="notifications.html" class="menu-item">
+          <i class="bi bi-bell"></i> <span>Notificações</span>
+          <span id="notificationBadge" class="badge">0</span>
+        </a>
+
+        <!-- Nova página de Configurações -->
+        <a href="settings.html" class="menu-item">
+          <i class="bi bi-gear"></i> <span>Configurações</span>
+        </a>
+      </div>
+
+      <a href="#" class="menu-item logout-btn" onclick="logout()">
+        <i class="bi bi-box-arrow-right"></i> <span>Sair</span>
+      </a>
+    </div>
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="content-view">
+        <div class="content-header">
+          <h2><i class="bi bi-ticket-detailed"></i> Gerenciar Tickets</h2>
+          <p>Visualize e responda aos tickets dos usuários</p>
+        </div>
+
+        <div class="admin-controls">
+          <div class="filters">
+            <div class="form-group">
+              <label for="filterStatus">Status</label>
+              <select id="filterStatus" onchange="filterTickets()">
+                <option value="todos">Todos os Status</option>
+                <option value="Aberto">Aberto</option>
+                <option value="Em andamento">Em andamento</option>
+                <option value="Resolvido">Resolvido</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="filterPriority">Prioridade</label>
+              <select id="filterPriority" onchange="filterTickets()">
+                <option value="todos">Todas as Prioridades</option>
+                <option value="baixa">Baixa</option>
+                <option value="media">Média</option>
+                <option value="alta">Alta</option>
+                <option value="critica">Crítica</option>
+              </select>
+            </div>
+
+            <button onclick="loadTickets()" class="btn btn-secondary">
+              <i class="bi bi-arrow-clockwise"></i> Atualizar
+            </button>
+          </div>
+        </div>
+
+        <div id="ticketsContainer" class="tickets-container"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/storage.js"></script>
+  <script src="../js/admin-tickets.js"></script>
+</body>
+
+</html>

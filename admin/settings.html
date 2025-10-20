@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configurações - Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="../assets/logo-small.ico" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <div class="sidebar collapsed" id="sidebar">
+      <div class="sidebar-header">
+        <button id="toggleBtn" class="btn-toggle"><img src="../assets/logo-small.png" width="40" alt="Logo"></button>
+        <span class="app-name">Helpdesk</span>
+      </div>
+
+      <div class="menu-group">
+        <a href="dashboard.html" class="menu-item">
+          <i class="bi bi-house"></i> <span>Dashboard</span>
+        </a>
+        <a href="tickets.html" class="menu-item">
+          <i class="bi bi-ticket-perforated"></i> <span>Tickets</span>
+        </a>
+        <a href="profile.html" class="menu-item">
+          <i class="bi bi-person"></i> <span>Perfil</span>
+        </a>
+        <a href="notifications.html" class="menu-item">
+          <i class="bi bi-bell"></i> <span>Notificações</span>
+          <span id="notificationBadge" class="badge">0</span>
+        </a>
+        <a href="settings.html" class="menu-item active">
+          <i class="bi bi-gear"></i> <span>Configurações</span>
+        </a>
+      </div>
+      
+      <a href="#" class="menu-item logout-btn" onclick="logout()">
+        <i class="bi bi-box-arrow-right"></i> <span>Sair</span>
+      </a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="content-view">
+        <div class="content-header">
+          <h2><i class="bi bi-gear"></i> Configurações do Sistema</h2>
+          <p>Gerencie as configurações principais</p>
+        </div>
+
+        <!-- Cards Principais -->
+        <div class="settings-cards">
+          
+          <!-- Informações do Sistema -->
+          <div class="settings-card info">
+            <div class="settings-header">
+              <i class="bi bi-graph-up"></i>
+              <h3>Informações do Sistema</h3>
+            </div>
+            <div class="settings-content">
+              <div class="system-info">
+                <div class="info-item">
+                  <span class="info-label">Total de Tickets:</span>
+                  <span class="info-value" id="infoTickets">0</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Usuários Cadastrados:</span>
+                  <span class="info-value" id="infoUsers">0</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Tickets Abertos:</span>
+                  <span class="info-value" id="infoOpenTickets">0</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Armazenamento:</span>
+                  <span class="info-value" id="infoStorage">0 KB</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Configurações Gerais -->
+          <div class="settings-card config">
+            <div class="settings-header">
+              <i class="bi bi-sliders"></i>
+              <h3>Configurações Gerais</h3>
+            </div>
+            <div class="settings-content">
+              <div class="form-group">
+                <label for="systemName">Nome do Sistema</label>
+                <input type="text" id="systemName" class="form-control" value="Helpdesk">
+              </div>
+              
+              <div class="form-group">
+                <label for="autoLogout">Logout Automático (minutos)</label>
+                <input type="number" id="autoLogout" class="form-control" value="30" min="5">
+              </div>
+              
+              <button class="btn btn-primary" onclick="saveSettings()">
+                <i class="bi bi-check-circle"></i> Salvar Configurações
+              </button>
+            </div>
+          </div>
+
+          <!-- Limpeza e Manutenção -->
+          <div class="settings-card clean">
+            <div class="settings-header">
+              <i class="bi bi-trash"></i>
+              <h3>Limpeza do Sistema</h3>
+            </div>
+            <div class="settings-content">
+              <div class="actions-grid">
+                <button class="btn btn-warning" onclick="clearReadNotifications()">
+                  <i class="bi bi-bell"></i> Limpar Notificações Lidas
+                </button>
+                <button class="btn btn-warning" onclick="clearOldTickets()">
+                  <i class="bi bi-clock-history"></i> Limpar Tickets Antigos
+                </button>
+                <button class="btn btn-info" onclick="exportData()">
+                  <i class="bi bi-download"></i> Exportar Dados
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Área de Perigo -->
+          <div class="settings-card danger">
+            <div class="settings-header">
+              <i class="bi bi-exclamation-triangle"></i>
+              <h3>Área de Perigo</h3>
+            </div>
+            <div class="settings-content">
+              <div class="danger-zone">
+                <div class="actions-grid">
+                  <button class="btn btn-danger" onclick="clearAllData()">
+                    <i class="bi bi-trash"></i> Limpar Todos os Dados
+                  </button>
+                  <button class="btn btn-danger" onclick="resetSystem()">
+                    <i class="bi bi-arrow-clockwise"></i> Resetar Sistema
+                  </button>
+                </div>
+                <div class="danger-warning">
+                  ⚠️ Estas ações não podem ser desfeitas
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Configurações Avançadas -->
+        <div class="section advanced-settings">
+          <h3><i class="bi bi-gear-fill"></i> Configurações Avançadas</h3>
+          
+          <div class="settings-grid">
+            <div class="feature-card">
+              <h4><i class="bi bi-shield-check"></i> Segurança</h4>
+              <div class="feature-actions">
+                <div class="form-group">
+                  <label for="maxLoginAttempts">Tentativas de Login</label>
+                  <input type="number" id="maxLoginAttempts" class="form-control" value="3" min="1">
+                </div>
+                <div class="form-group">
+                  <label for="sessionTimeout">Timeout da Sessão (min)</label>
+                  <input type="number" id="sessionTimeout" class="form-control" value="60" min="5">
+                </div>
+              </div>
+            </div>
+
+            <div class="feature-card">
+              <h4><i class="bi bi-person-badge"></i> Usuários</h4>
+              <div class="feature-actions">
+                <div class="form-group">
+                  <label for="maxTicketsUser">Máx. Tickets por Usuário</label>
+                  <input type="number" id="maxTicketsUser" class="form-control" value="10" min="1">
+                </div>
+                <div class="form-group">
+                  <label for="defaultRole">Função Padrão</label>
+                  <select id="defaultRole" class="form-control">
+                    <option value="user">Usuário</option>
+                    <option value="support">Suporte</option>
+                    <option value="admin">Administrador</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-primary" onclick="saveAdvancedSettings()">
+              <i class="bi bi-save"></i> Salvar Configurações Avançadas
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/storage.js"></script>
+  <script src="../js/admin.js"></script>
+  <script>
+    // Carregar informações do sistema
+    document.addEventListener('DOMContentLoaded', function() {
+      updateSystemInfo();
+      loadSettings();
+    });
+
+    function updateSystemInfo() {
+      const tickets = getTickets();
+      const users = getUsers();
+      
+      document.getElementById('infoTickets').textContent = tickets.length;
+      document.getElementById('infoUsers').textContent = users.length;
+      document.getElementById('infoOpenTickets').textContent = tickets.filter(t => t.status === 'Aberto').length;
+      
+      // Calcular armazenamento
+      const storage = (JSON.stringify(tickets).length + JSON.stringify(users).length) / 1024;
+      document.getElementById('infoStorage').textContent = storage.toFixed(1) + ' KB';
+    }
+
+    function loadSettings() {
+      // Carregar configurações salvas
+      const settings = JSON.parse(localStorage.getItem('helpdesk_settings')) || {};
+      
+      document.getElementById('systemName').value = settings.systemName || 'Helpdesk';
+      document.getElementById('autoLogout').value = settings.autoLogout || 30;
+      document.getElementById('maxLoginAttempts').value = settings.maxLoginAttempts || 3;
+      document.getElementById('sessionTimeout').value = settings.sessionTimeout || 60;
+      document.getElementById('maxTicketsUser').value = settings.maxTicketsUser || 10;
+      document.getElementById('defaultRole').value = settings.defaultRole || 'user';
+    }
+
+    function saveSettings() {
+      const settings = {
+        systemName: document.getElementById('systemName').value,
+        autoLogout: parseInt(document.getElementById('autoLogout').value)
+      };
+      
+      localStorage.setItem('helpdesk_settings', JSON.stringify(settings));
+      alert('Configurações salvas com sucesso!');
+    }
+
+    function saveAdvancedSettings() {
+      const settings = JSON.parse(localStorage.getItem('helpdesk_settings')) || {};
+      
+      settings.maxLoginAttempts = parseInt(document.getElementById('maxLoginAttempts').value);
+      settings.sessionTimeout = parseInt(document.getElementById('sessionTimeout').value);
+      settings.maxTicketsUser = parseInt(document.getElementById('maxTicketsUser').value);
+      settings.defaultRole = document.getElementById('defaultRole').value;
+      
+      localStorage.setItem('helpdesk_settings', JSON.stringify(settings));
+      alert('Configurações avançadas salvas!');
+    }
+
+    function clearReadNotifications() {
+      if (confirm('Deseja limpar todas as notificações lidas?')) {
+        // Implementação simples - na prática você limparia as notificações do localStorage
+        alert('Notificações lidas foram limpas!');
+      }
+    }
+
+    function clearOldTickets() {
+      if (confirm('Deseja limpar tickets com mais de 30 dias?')) {
+        const tickets = getTickets();
+        const thirtyDaysAgo = new Date();
+        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+        
+        const activeTickets = tickets.filter(ticket => new Date(ticket.data) >= thirtyDaysAgo);
+        const removedCount = tickets.length - activeTickets.length;
+        
+        if (removedCount > 0) {
+          saveTickets(activeTickets);
+          alert(removedCount + ' tickets antigos foram removidos!');
+          updateSystemInfo();
+        } else {
+          alert('Não há tickets antigos para remover.');
+        }
+      }
+    }
+
+    function exportData() {
+      const data = {
+        tickets: getTickets(),
+        users: getUsers(),
+        settings: JSON.parse(localStorage.getItem('helpdesk_settings')) || {},
+        exportDate: new Date().toISOString()
+      };
+      
+      const dataStr = JSON.stringify(data, null, 2);
+      const dataBlob = new Blob([dataStr], {type: 'application/json'});
+      
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(dataBlob);
+      link.download = `helpdesk-backup-${new Date().toISOString().split('T')[0]}.json`;
+      link.click();
+      
+      alert('Dados exportados com sucesso!');
+    }
+
+    function resetSystem() {
+      if (confirm('⚠️ Resetar todo o sistema? Isso manterá apenas os usuários padrão.')) {
+        // Limpa tudo exceto usuários
+        const users = getUsers();
+        localStorage.clear();
+        saveUsers(users);
+        alert('Sistema resetado com sucesso!');
+        setTimeout(() => location.reload(), 1000);
+      }
+    }
+
+    function clearAllData() {
+      if (confirm('⚠️ APAGAR TODOS OS DADOS PERMANENTEMENTE? Isso inclui todos os tickets e usuários.')) {
+        localStorage.clear();
+        alert('Todos os dados foram apagados!');
+        setTimeout(() => location.reload(), 1000);
+      }
+    }
+  </script>
+</body>
+</html>

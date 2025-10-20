@@ -1,0 +1,133 @@
+:root {
+    --primary-color: #4361ee;
+    --primary-dark: #3a56d4;
+    --bg-white: #ffffff;
+    --text-dark: #2b2d42;
+    --text-light: #8e9aaf;
+    --border-radius: 8px;
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+  }
+  
+  .login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color) 0%, #3f37c9 100%);
+  }
+  
+  .login-box {
+    width: 100%;
+    max-width: 400px;
+    background: var(--bg-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    transform: translateY(0);
+    transition: all 0.3s ease;
+  }
+  
+  .login-box:hover {
+    transform: translateY(-5px);
+  }
+  
+  .login-header {
+    padding: 30px;
+    text-align: center;
+    background-color: var(--bg-white);
+  }
+  
+  .login-header img {
+    margin-bottom: 15px;
+  }
+  
+  .login-header h2 {
+    color: var(--text-dark);
+    margin-bottom: 5px;
+  }
+  
+  .login-header p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+  }
+  
+  .login-box form {
+    padding: 0 30px 30px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-dark);
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+  }
+  
+  .form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+  }
+  
+  .btn {
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+  }
+  
+  .btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+  }
+  
+  .message {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    display: none;
+  }
+  
+  .message.error {
+    background-color: rgba(247, 37, 133, 0.1);
+    color: #f72585;
+    border: 1px solid rgba(247, 37, 133, 0.2);
+  }
