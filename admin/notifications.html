@@ -10,6 +10,20 @@
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
+  <!-- Mobile Header -->
+  <div class="mobile-header">
+    <div class="logo-container">
+      <img src="../assets/logo-small.png" alt="Logo">
+      <span>Helpdesk</span>
+    </div>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+      <i class="bi bi-list"></i>
+    </button>
+  </div>
+
+  <!-- Overlay para fechar menu -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
   <div class="app-container">
     <!-- Sidebar -->
     <div class="sidebar collapsed" id="sidebar">
@@ -70,5 +84,44 @@
 
   <script src="../js/storage.js"></script>
   <script src="../js/admin-notifications.js"></script>
+  <script>
+    // Mobile menu functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      
+      if (mobileMenuBtn && sidebar && overlay) {
+        mobileMenuBtn.addEventListener('click', function() {
+          sidebar.classList.add('show');
+          overlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        });
+        
+        overlay.addEventListener('click', function() {
+          sidebar.classList.remove('show');
+          overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        });
+        
+        const menuItems = sidebar.querySelectorAll('.menu-item');
+        menuItems.forEach(item => {
+          item.addEventListener('click', function() {
+            sidebar.classList.remove('show');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+          });
+        });
+        
+        window.addEventListener('resize', function() {
+          if (window.innerWidth > 768) {
+            sidebar.classList.remove('show');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>

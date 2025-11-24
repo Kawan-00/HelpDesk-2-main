@@ -544,17 +544,91 @@
     color: var(--text-light);
   }
   
+  /* Mobile Header */
+  .mobile-header {
+    display: none;
+    background: var(--bg-white);
+    padding: 15px 20px;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mobile-header .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .mobile-header .logo-container img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .mobile-header .logo-container span {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+  }
+
+  .mobile-menu-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+
+  .mobile-menu-btn:hover {
+    background: var(--bg-gray);
+  }
+
+  /* Overlay para fechar menu mobile */
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+  }
+
   /* Responsividade */
   @media (max-width: 768px) {
+    /* Mobile Header */
+    .mobile-header {
+      display: flex;
+    }
+
+    /* Sidebar Mobile */
     .sidebar {
       position: fixed;
       left: -280px;
       height: 100vh;
-    }
-    
-    .sidebar.collapsed {
-      left: 0;
-      width: 70px;
+      top: 0;
+      z-index: 999;
+      transition: left 0.3s ease;
+      box-shadow: var(--shadow-lg);
     }
     
     .sidebar.show {
@@ -562,25 +636,279 @@
       width: 280px;
     }
     
-    .content-view {
+    .sidebar.collapsed {
+      left: -280px;
+    }
+
+    .sidebar-header {
       padding: 20px;
     }
-    
+
+    /* Main Content */
+    .main-content {
+      width: 100%;
+      margin-left: 0;
+    }
+
+    .content-view {
+      padding: 15px;
+      margin-top: 0;
+    }
+
+    .content-header {
+      margin-bottom: 20px;
+    }
+
+    .content-header h2 {
+      font-size: 1.3rem;
+    }
+
+    /* Stats Cards */
+    .stats-cards {
+      grid-template-columns: 1fr;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      padding: 15px;
+    }
+
+    .stat-icon {
+      width: 45px;
+      height: 45px;
+      font-size: 1.3rem;
+    }
+
+    .stat-info h3 {
+      font-size: 1.5rem;
+    }
+
+    .stat-info p {
+      font-size: 0.85rem;
+    }
+
+    /* Tickets Grid */
+    .tickets-grid {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .ticket {
+      padding: 15px;
+    }
+
+    .ticket h4 {
+      font-size: 1rem;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .ticket .category {
+      font-size: 0.75rem;
+    }
+
+    .ticket .meta {
+      font-size: 0.8rem;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    /* Formulários */
     .form-row {
       flex-direction: column;
       gap: 0;
     }
-    
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 10px 12px;
+      font-size: 0.9rem;
+    }
+
+    .form-actions {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .form-actions .btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* Admin Controls */
     .admin-controls {
       flex-direction: column;
       align-items: flex-start;
       gap: 15px;
+      padding: 15px;
     }
     
     .admin-controls .filters {
       flex-direction: column;
       align-items: flex-start;
       width: 100%;
+      gap: 10px;
+    }
+
+    /* Profile */
+    .content-header.with-avatar {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .profile-details {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .profile-actions {
+      flex-direction: column;
+    }
+
+    .profile-actions .btn {
+      width: 100%;
+    }
+
+    /* Notifications */
+    .notification-item {
+      padding: 12px;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .notification-footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+    }
+
+    /* Settings */
+    .settings-cards {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .settings-card {
+      padding: 20px;
+    }
+
+    /* Admin Stats */
+    .admin-stats {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .stat-card.primary,
+    .stat-card.warning,
+    .stat-card.info,
+    .stat-card.success {
+      padding: 15px;
+    }
+
+    /* Tickets Filters */
+    .tickets-filters {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .filter-group {
+      width: 100%;
+      min-width: 100%;
+    }
+
+    /* Ticket Admin */
+    .ticket-admin {
+      padding: 15px;
+    }
+
+    .ticket-admin .ticket-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .ticket-admin .ticket-actions {
+      flex-direction: column;
+    }
+
+    .ticket-admin .ticket-actions .btn {
+      width: 100%;
+    }
+
+    .ticket-admin .reply-section {
+      flex-direction: column;
+    }
+
+    /* Section Headers */
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    /* Empty States */
+    .empty-message {
+      padding: 30px 15px;
+      font-size: 0.85rem;
+    }
+
+    /* Modal */
+    .modal-content {
+      margin: 20px;
+      padding: 20px;
+      max-width: calc(100% - 40px);
+    }
+
+    /* Recent Tickets */
+    .recent-tickets-section {
+      padding: 15px;
+    }
+
+    .ticket-item {
+      padding: 12px;
+    }
+
+    .ticket-meta {
+      flex-direction: column;
+      gap: 5px;
+    }
+  }
+
+  /* Mobile pequeno (até 480px) */
+  @media (max-width: 480px) {
+    .content-view {
+      padding: 10px;
+    }
+
+    .mobile-header {
+      padding: 12px 15px;
+    }
+
+    .stat-card {
+      padding: 12px;
+    }
+
+    .ticket {
+      padding: 12px;
+    }
+
+    .settings-card {
+      padding: 15px;
+    }
+
+    .content-header h2 {
+      font-size: 1.1rem;
+    }
+
+    .content-header p {
+      font-size: 0.85rem;
     }
   }
   
@@ -1268,16 +1596,94 @@
 
 /* Mobile */
 @media (max-width: 768px) {
+  .chatbot-toggle-btn {
+    width: 55px;
+    height: 55px;
+    bottom: 15px;
+    right: 15px;
+    font-size: 1.3rem;
+  }
+
   .chatbot-widget {
     width: calc(100vw - 30px);
-    height: 60vh;
+    max-width: 100%;
+    height: 70vh;
+    max-height: 600px;
     right: 15px;
     left: 15px;
-    bottom: 70px;
+    bottom: 80px;
+    border-radius: 15px;
   }
-  
+
+  .chatbot-header {
+    padding: 15px;
+    border-radius: 15px 15px 0 0;
+  }
+
+  .chatbot-title {
+    font-size: 0.95rem;
+  }
+
+  .chatbot-messages {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .message {
+    max-width: 85%;
+  }
+
+  .message-avatar {
+    width: 26px;
+    height: 26px;
+    font-size: 0.75rem;
+  }
+
+  .message-content {
+    padding: 10px 14px;
+    font-size: 0.85rem;
+  }
+
+  .chatbot-actions {
+    padding: 10px;
+    gap: 6px;
+  }
+
   .action-buttons {
     grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .btn-action {
+    padding: 10px 12px;
+    font-size: 0.8rem;
+  }
+
+  .btn-submit {
+    padding: 10px;
+    font-size: 0.85rem;
+  }
+
+  .chatbot-actions .form-control {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .chatbot-widget {
+    width: calc(100vw - 20px);
+    height: 65vh;
+    right: 10px;
+    left: 10px;
+    bottom: 75px;
+  }
+
+  .chatbot-toggle-btn {
+    width: 50px;
+    height: 50px;
+    bottom: 10px;
+    right: 10px;
   }
 }   
 

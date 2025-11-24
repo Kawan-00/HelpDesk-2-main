@@ -131,3 +131,64 @@
     color: #f72585;
     border: 1px solid rgba(247, 37, 133, 0.2);
   }
+
+  /* Responsividade Mobile */
+  @media (max-width: 768px) {
+    .login-container {
+      padding: 20px;
+    }
+
+    .login-box {
+      max-width: 100%;
+      border-radius: 12px;
+    }
+
+    .login-header {
+      padding: 25px 20px;
+    }
+
+    .login-header img {
+      width: 80px;
+      margin-bottom: 10px;
+    }
+
+    .login-header h2 {
+      font-size: 1.3rem;
+    }
+
+    .login-header p {
+      font-size: 0.85rem;
+    }
+
+    .login-box form {
+      padding: 0 20px 25px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group input {
+      padding: 10px 12px;
+      font-size: 0.9rem;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .login-header {
+      padding: 20px 15px;
+    }
+
+    .login-header h2 {
+      font-size: 1.1rem;
+    }
+
+    .login-box form {
+      padding: 0 15px 20px;
+    }
+  }
